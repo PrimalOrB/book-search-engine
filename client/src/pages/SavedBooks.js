@@ -1,16 +1,14 @@
-import React, { useState, useEffect, setState } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SavedBooks = () => {
 
 
-  // const [ userData, setUserData ] = useState({});
   const [removeBook, { error } ] = useMutation(REMOVE_BOOK)
 
   const { loading, data } = useQuery(GET_ME);
@@ -31,9 +29,6 @@ const SavedBooks = () => {
       });
       
       removeBookId(bookId);
-      const storedIds = getSavedBookIds()
-
-
 
       // window.location.reload()
     } catch (err) {
@@ -42,12 +37,14 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (!userData.savedBooks) {
+  if (!userData.savedBooks || loading) {
     return <h2>LOADING...</h2>;
   }
+ 
 
   return (
-    <>
+    <>   
+    {error && <div>Something went wrong...</div>}
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
           <h1>Viewing saved books!</h1>

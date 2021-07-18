@@ -30,10 +30,8 @@ const resolvers = {
             return { token, user };
         },
         addUser: async (parent, args) => {
-            console.log( args )
             const user = await User.create(args);
             const token = signToken(user);
-            console.log( token, user )
             return { token, user };
         },
         saveBook: async (parent, {input}, context) => {
@@ -55,7 +53,6 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         removeBook:  async (parent, {bookId}, context) => {
-            console.log( bookId )
             if (context.user) {
                 const user = context.user
                 try {

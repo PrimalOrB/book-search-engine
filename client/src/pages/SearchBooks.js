@@ -23,7 +23,6 @@ const SearchBooks = () => {
   });
 
   const [saveBook, { error } ] = useMutation(SAVE_BOOK)
-
   
 
   // create method to search for books and set state on form submit
@@ -67,7 +66,6 @@ const SearchBooks = () => {
       bookToSave.description = 'No description'
     } 
       
-
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -76,7 +74,7 @@ const SearchBooks = () => {
     }
 
     try {
-      const { data } = await saveBook({
+      await saveBook({
         variables: { input: { ...bookToSave } }
       });
 
@@ -89,6 +87,7 @@ const SearchBooks = () => {
 
   return (
     <>
+    {error && <div>Something went wrong...</div>}
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
           <h1>Search for Books!</h1>
