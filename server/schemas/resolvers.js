@@ -8,13 +8,12 @@ const resolvers = {
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
-                .populate('thoughts')
-                .populate('friends');
-          
+         
               return userData;
             }
           
-            throw new AuthenticationError('Not logged in');        },
+            throw new AuthenticationError('Not logged in');        
+        },
     },
 
     Mutation: {
@@ -31,14 +30,14 @@ const resolvers = {
             return { token, user };
         },
         addUser: async (parent, args) => {
+            console.log( args )
             const user = await User.create(args);
             const token = signToken(user);
             console.log( token, user )
             return { token, user };
-          },
+        },
         saveBook: async (parent, {input}, context) => {
             const book = {...input}
-
             if (context.user) {
                 const user = context.user
                 try {
