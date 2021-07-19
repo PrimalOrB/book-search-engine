@@ -21,7 +21,7 @@ User account controlled site to search for books, and add/remove them from your 
 ![image](https://user-images.githubusercontent.com/69044956/126084611-bffcfa97-5805-4b8e-9f6a-9d933ce8a659.png)
 
 ## Webpage
-[primalorb-tech-blog on heroku](https://primalorb-book-search.herokuapp.com/)
+[primalorb-book-search on heroku](https://primalorb-book-search.herokuapp.com/)
 
 ## Usage
 
